@@ -47,6 +47,8 @@ class Reservation023Test {
         assertNotNull(day, "未来30天内没有两个场馆同时空闲的日期");
         Order original = ReservationTestSupport.saveOrder(
                 orderDao, user, basketball, day.atTime(10, 0), 2);
+        original.setUserID("RES-H-023-other-user");
+        orderDao.saveAndFlush(original);
 
         WebDriver driver = ChromeDriverSupport.openBrowser();
         try {
