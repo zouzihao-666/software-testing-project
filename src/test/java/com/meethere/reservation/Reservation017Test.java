@@ -96,13 +96,11 @@ class Reservation017Test {
                 List<Order> invalidOrders = orderDao.findAllById(newOrderIds);
                 boolean hasZeroHourOrder = invalidOrders.stream()
                         .anyMatch(order -> order.getHours() == 0);
-                orderDao.deleteAll(invalidOrders);
-                orderDao.flush();
-                Thread.sleep(3000);
                 if (hasZeroHourOrder) {
-                    fail("后台接受hours=0并生成了0小时订单，页面提示：" + message);
+                    fail("后台接受hours=0并生成了0小时订单，页面提示：" + message
+                            + "；异常订单编号：" + newOrderIds);
                 }
-                fail("后台使用异常时长生成了订单");
+                fail("后台使用异常时长生成了订单；异常订单编号：" + newOrderIds);
             }
 
             assertEquals(existingOrderIds, currentOrderIds, "hours=0时不能生成订单");

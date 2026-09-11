@@ -96,11 +96,8 @@ class Reservation014Test {
             Set<Integer> newOrderIds = new HashSet<>(currentOrderIds);
             newOrderIds.removeAll(existingOrderIds);
             if (!newOrderIds.isEmpty()) {
-                orderDao.deleteAll(orderDao.findAllById(newOrderIds));
-                orderDao.flush();
-                Thread.sleep(3000);
                 fail("选择20:00—22:00后被缩短为" + selectedHours
-                        + "小时并成功提交，系统未提示超出开放时间");
+                        + "小时并成功提交，系统未提示超出开放时间；异常订单编号：" + newOrderIds);
             }
 
             assertTrue(!"提交成功！".equals(message) || selectedHours.isEmpty(),
