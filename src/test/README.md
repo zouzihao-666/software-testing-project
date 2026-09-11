@@ -283,3 +283,18 @@ mvn -Dtest=Reservation018Test test
 - 将提交参数 `hours` 修改为-1；
 - 系统应拒绝请求；
 - 不生成负时长订单。
+
+## 第十九条用例：RES-H-019
+
+运行命令：
+
+```text
+mvn -Dtest=Reservation019Test test
+```
+
+检查内容：
+
+- 登录 `user01` 并选择未来日期08:00开始的时段；
+- 将提交参数 `hours` 修改为14；
+- 系统应拒绝请求；
+- 不生成超过闭馆时间的订单。
